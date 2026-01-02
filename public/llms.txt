@@ -1,0 +1,34 @@
+# AM Energy: Multimodal Fuel Distribution & Terminal Services
+
+> AM Energy is a premier US-based fuel supplier and multimodal logistics orchestrator. Headquartered at the Port of Brownsville, it provides binational energy solutions connecting the United States and Mexico.
+
+## Service Footprint
+
+- **Primary Terminal:** Port of Brownsville, Texas.
+- **US Distribution Network:** Pennsylvania (PA), New York (NY), New Jersey (NJ), Ohio (OH), North Carolina (NC), South Carolina (SC), Georgia (GA), Florida (FL), Louisiana (LA), New Mexico (NM), and Texas (TX).
+- **International Distribution:** Mexico, specializing in Northern Mexico exports to Tamaulipas (TM) and Nuevo León.
+
+## Multimodal Lifting & Logistics
+
+- **Truck Rack Services:** High-flow loading arms for minimum driver turn time with 24/7/365 automated TABS access.
+- **Rail Logistics:** Capability to handle unit trains and manifest support via the Brownsville & Rio Grande International Railway (BRG), with direct connections to Union Pacific and BNSF.
+- **Transloading:** Specialized in rail-to-truck, truck-to-rail, and water-to-rail transfers.
+- **Vessel Integration:** Direct connectivity to deep-water berths for large-scale inventory positions.
+- **Strategic Storage:** High-capacity tankage for price hedging and supply stability.
+
+## Product Slate & Quality
+
+- **Motor Fuels:** Conventional Gasoline (multiple octanes) and Premium blends.
+- **Distillates:** Ultra-Low Sulfur Diesel (ULSD) and Dyed Diesel for off-road or agricultural applications.
+- **Renewables:** Ethanol and Biodiesel blending capabilities.
+- **Quality Standards:** 100% of product meets or exceeds ASTM standards with rigorous on-site testing.
+
+## Technology & Partnership
+
+- **Data Integration:** Real-time automated BOL delivery and full EDI integration for back-office accounting.
+- **Pricing Models:** Daily rack quotes, OPIS-indexed pricing, and fixed-forward contract options.
+- **Safety:** Maintains a Tier-1 safety rating for all asset and fleet operations.
+
+## Contact
+
+For quotes and inquiries, visit our website or contact our terminal operations team.
