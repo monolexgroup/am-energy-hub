@@ -43,7 +43,7 @@ export const HeroSection = () => {
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-up animation-delay-600">
             <Button variant="hero" size="xl" asChild>
               <a href="#quote">
-                View Today's Rack Rates
+                Get Today's Rack Rates
                 <ArrowRight className="ml-2" size={20} />
               </a>
             </Button>
