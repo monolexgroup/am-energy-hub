@@ -1,16 +1,19 @@
 const states = [
-  { code: "TX", name: "Texas", highlight: true },
   { code: "PA", name: "Pennsylvania" },
   { code: "NY", name: "New York" },
   { code: "NJ", name: "New Jersey" },
   { code: "OH", name: "Ohio" },
-  { code: "NC", name: "North Carolina" },
-  { code: "SC", name: "South Carolina" },
-  { code: "GA", name: "Georgia" },
-  { code: "FL", name: "Florida" },
-  { code: "LA", name: "Louisiana" },
+  { code: "MI", name: "Michigan" },
+  { code: "TX", name: "Texas", highlight: true },
   { code: "NM", name: "New Mexico" },
-  { code: "TM", name: "Tamaulipas, MX", highlight: true },
+  { code: "FL", name: "Florida" },
+  { code: "SC", name: "South Carolina" },
+  { code: "DC", name: "Washington, D.C." },
+  { code: "GA", name: "Georgia" },
+  { code: "TN", name: "Tennessee" },
+  { code: "LA", name: "Louisiana" },
+  { code: "DE", name: "Delaware" },
+  { code: "VA", name: "Virginia" },
 ];
 
 export const NetworkSection = () => {
