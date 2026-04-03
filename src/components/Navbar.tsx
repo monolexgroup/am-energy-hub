@@ -37,7 +37,7 @@ export const Navbar = () => {
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center">
+          <a href="/" onClick={(e) => { e.preventDefault(); navigate("/"); }} className="flex items-center cursor-pointer">
             <img
               src={isScrolled ? logo : logoLight}
               alt="AM Energy - Multimodal Fuel Terminal"
