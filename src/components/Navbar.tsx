@@ -10,6 +10,7 @@ const navLinks = [
   { href: "#products", label: "Products" },
   { href: "#logistics", label: "Logistics" },
   { href: "#network", label: "States Served" },
+  { href: "/corporate-profile", label: "Corporate Profile", isRoute: true },
 ];
 
 export const Navbar = () => {
