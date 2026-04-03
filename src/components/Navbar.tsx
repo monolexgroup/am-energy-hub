@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
@@ -9,11 +10,13 @@ const navLinks = [
   { href: "#products", label: "Products" },
   { href: "#logistics", label: "Logistics" },
   { href: "#network", label: "States Served" },
+  { href: "/corporate-profile", label: "Corporate Profile", isRoute: true },
 ];
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,7 +37,7 @@ export const Navbar = () => {
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center">
+          <a href="/" onClick={(e) => { e.preventDefault(); navigate("/"); }} className="flex items-center cursor-pointer">
             <img
               src={isScrolled ? logo : logoLight}
               alt="AM Energy - Multimodal Fuel Terminal"
@@ -48,6 +51,7 @@ export const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={link.isRoute ? (e) => { e.preventDefault(); navigate(link.href); } : undefined}
                 className={`nav-link font-medium transition-colors ${
                   isScrolled ? "text-foreground" : "text-primary-foreground"
                 }`}
@@ -91,7 +95,13 @@ export const Navbar = () => {
                   key={link.href}
                   href={link.href}
                   className="text-foreground font-medium hover:text-primary transition-colors py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    if (link.isRoute) {
+                      e.preventDefault();
+                      navigate(link.href);
+                    }
+                    setIsMobileMenuOpen(false);
+                  }}
                 >
                   {link.label}
                 </a>
