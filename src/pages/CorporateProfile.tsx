@@ -156,6 +156,11 @@ const CorporateProfile = () => {
               <p className="text-sm text-muted-foreground mt-2">8735 Dunwoody Place, Ste 6, Atlanta, GA 30350, USA</p>
               <p className="text-sm text-muted-foreground">PO Box 90, Ellenton, FL 34222, USA</p>
             </div>
+            <div className="bento-item mb-8">
+              <p className="font-semibold text-foreground">AM Energy (Cyprus)</p>
+              <p className="text-sm text-muted-foreground mt-2">Our international trade, finance and customer service office</p>
+              <p className="text-sm text-muted-foreground mt-2">Nicosia, Cyprus</p>
+            </div>
             <div className="flex flex-wrap justify-center gap-3">
               {["Rotterdam", "Greenwich", "Houston", "Atlanta", "Palmetto", "Dubai"].map((city) => (
                 <span key={city} className="state-badge">{city}</span>
