@@ -51,6 +51,7 @@ export const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={link.isRoute ? (e) => { e.preventDefault(); navigate(link.href); } : undefined}
                 className={`nav-link font-medium transition-colors ${
                   isScrolled ? "text-foreground" : "text-primary-foreground"
                 }`}
