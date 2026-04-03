@@ -95,7 +95,13 @@ export const Navbar = () => {
                   key={link.href}
                   href={link.href}
                   className="text-foreground font-medium hover:text-primary transition-colors py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    if (link.isRoute) {
+                      e.preventDefault();
+                      navigate(link.href);
+                    }
+                    setIsMobileMenuOpen(false);
+                  }}
                 >
                   {link.label}
                 </a>
