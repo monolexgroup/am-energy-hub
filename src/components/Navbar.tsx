@@ -1,22 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/logo.png";
 import logoLight from "@/assets/logo-light.png";
 
-const navLinks = [
+const homeSubLinks = [
   { href: "#terminal", label: "Our Terminal" },
   { href: "#products", label: "Products" },
   { href: "#logistics", label: "Logistics" },
   { href: "#network", label: "States Served" },
-  { href: "/corporate-profile", label: "Corporate Profile", isRoute: true },
 ];
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isHomeDropdownOpen, setIsHomeDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +27,32 @@ export const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsHomeDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleAnchorClick = (href: string) => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      // Wait for navigation then scroll
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    } else {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const textColor = isScrolled ? "text-foreground" : "text-primary-foreground";
 
   return (
     <header
@@ -47,18 +75,48 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={link.isRoute ? (e) => { e.preventDefault(); navigate(link.href); } : undefined}
-                className={`nav-link font-medium transition-colors ${
-                  isScrolled ? "text-foreground" : "text-primary-foreground"
-                }`}
+            {/* Home with dropdown */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                className={`nav-link font-medium transition-colors flex items-center gap-1 ${textColor}`}
+                onClick={() => {
+                  navigate("/");
+                  setIsHomeDropdownOpen(false);
+                }}
+                onMouseEnter={() => setIsHomeDropdownOpen(true)}
               >
-                {link.label}
-              </a>
-            ))}
+                Home
+                <ChevronDown size={14} className={`transition-transform ${isHomeDropdownOpen ? "rotate-180" : ""}`} />
+              </button>
+              {isHomeDropdownOpen && (
+                <div
+                  className="absolute top-full left-0 mt-2 bg-background/95 backdrop-blur-xl rounded-xl shadow-xl border border-border py-2 min-w-[180px] animate-fade-in"
+                  onMouseLeave={() => setIsHomeDropdownOpen(false)}
+                >
+                  {homeSubLinks.map((link) => (
+                    <button
+                      key={link.href}
+                      className="block w-full text-left px-4 py-2 text-foreground font-medium hover:text-primary hover:bg-muted/50 transition-colors"
+                      onClick={() => {
+                        handleAnchorClick(link.href);
+                        setIsHomeDropdownOpen(false);
+                      }}
+                    >
+                      {link.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Corporate Profile */}
+            <a
+              href="/corporate-profile"
+              onClick={(e) => { e.preventDefault(); navigate("/corporate-profile"); }}
+              className={`nav-link font-medium transition-colors ${textColor}`}
+            >
+              Corporate Profile
+            </a>
           </div>
 
           {/* CTA Button */}
@@ -66,9 +124,9 @@ export const Navbar = () => {
             <Button
               variant={isScrolled ? "default" : "hero"}
               size="lg"
-              asChild
+              onClick={() => handleAnchorClick("#quote")}
             >
-              <a href="#quote">Get a Quote</a>
+              Get a Quote
             </Button>
           </div>
 
@@ -79,9 +137,9 @@ export const Navbar = () => {
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <X className={isScrolled ? "text-foreground" : "text-primary-foreground"} size={28} />
+              <X className={textColor} size={28} />
             ) : (
-              <Menu className={isScrolled ? "text-foreground" : "text-primary-foreground"} size={28} />
+              <Menu className={textColor} size={28} />
             )}
           </button>
         </div>
@@ -89,25 +147,33 @@ export const Navbar = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="lg:hidden mt-4 pb-4 animate-fade-in">
-            <div className="flex flex-col gap-4 bg-background/95 backdrop-blur-xl rounded-2xl p-6 shadow-xl">
-              {navLinks.map((link) => (
-                <a
+            <div className="flex flex-col gap-2 bg-background/95 backdrop-blur-xl rounded-2xl p-6 shadow-xl">
+              <button
+                className="text-foreground font-semibold hover:text-primary transition-colors py-2 text-left"
+                onClick={() => { navigate("/"); setIsMobileMenuOpen(false); }}
+              >
+                Home
+              </button>
+              {homeSubLinks.map((link) => (
+                <button
                   key={link.href}
-                  href={link.href}
-                  className="text-foreground font-medium hover:text-primary transition-colors py-2"
-                  onClick={(e) => {
-                    if (link.isRoute) {
-                      e.preventDefault();
-                      navigate(link.href);
-                    }
+                  className="text-foreground/80 font-medium hover:text-primary transition-colors py-2 text-left pl-4"
+                  onClick={() => {
+                    handleAnchorClick(link.href);
                     setIsMobileMenuOpen(false);
                   }}
                 >
                   {link.label}
-                </a>
+                </button>
               ))}
-              <Button variant="default" size="lg" asChild className="mt-2">
-                <a href="#quote">Get a Quote</a>
+              <button
+                className="text-foreground font-semibold hover:text-primary transition-colors py-2 text-left mt-2"
+                onClick={() => { navigate("/corporate-profile"); setIsMobileMenuOpen(false); }}
+              >
+                Corporate Profile
+              </button>
+              <Button variant="default" size="lg" className="mt-2" onClick={() => { handleAnchorClick("#quote"); setIsMobileMenuOpen(false); }}>
+                Get a Quote
               </Button>
             </div>
           </div>
